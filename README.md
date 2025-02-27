@@ -16,7 +16,7 @@ This is a Power BI Dashboard I created for my current role. It loads data straig
 
 Date Select Slicer: Allows supervisors to filter data table and visuals by Year and Month. 
 
-Caregiver Select Slicer: Allows supervisors to select a specific caregiver for perofrmance review.
+Caregiver Select Slicer: Allows supervisors to select a specific caregiver for performance review.
 
 ### VISUALS
 

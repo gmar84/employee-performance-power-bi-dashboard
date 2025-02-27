@@ -8,7 +8,7 @@ This is a Power BI Dashboard I created for my current role. It loads data straig
 
 ## Files
 
-`ReadMe.md`- This file
+`README.md`- This file
 
 [NotesReport.pdf](NotesReport.pdf) - Preview of the Dashboard
 

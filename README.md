@@ -12,13 +12,13 @@ This is a Power BI Dashboard I created for my current role. It loads data straig
 
 [Dashboard.pdf](Dashboard.pdf) - Preview of the Dashboard
 
-### FILTERS
+### Filters
 
 Date Select Slicer: Allows supervisors to filter data table and visuals by Year and Month. 
 
 Caregiver Select Slicer: Allows supervisors to select a specific caregiver for performance review.
 
-### VISUALS
+### Visuals
 
 Cards - KPIs which include Total, Late, Unbillable notes and a performance card which shows on time Notes vs Total Notes.
 
@@ -28,7 +28,7 @@ Treemaps - Top 5 counts of Caregivers with Unbillables and another with Late Not
 
 Area Charts - Shows Total Late Notes and Unbillables in the past 3 months with a trend line. The slicers at the top do not interact with these visuals, as they are meant to always provide an overall trend of performance.
 
-### DAX formulas used
+### DAX Formulas Used
 
 Column added to the data set which determines if the note is Late or On Time:
 

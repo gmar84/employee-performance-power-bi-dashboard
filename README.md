@@ -49,3 +49,7 @@ Returns the month number from the date:
 Used to concatenate the first 3 letters of first name + first two letters of last name:
 
 `supervisor_code = CONCATENATE(UPPER(LEFT(notes[client_supervisor], 3) ), UPPER(MID(notes[client_supervisor], FIND(" ", notes[client_supervisor], 2) + 1, 2 ) ) )`
+
+Used to create a column which further divide Dates into Billing Cycles, so that data can be viewed for each cycle, if desired.
+
+`BillingCycle = IF(notes[date_of_service].[Day] > 0 && notes[date_of_service].[Day] < 16, "1-15", "16-eom")`

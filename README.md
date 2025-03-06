@@ -6,6 +6,10 @@
 
 This is a Power BI Dashboard I created for my current role. It loads data straight from a MySQL server which is hosted on AWS, so the data is always up to date. It uses various visuals to show employee performance in clinical documentation and is primarily used by supervisors.
 
+### Overview
+
+The first page is the welcome page, showing the company logo and the reports available for selection. The Overview page displays notes for all staff over the past 3 months, providing counts, trend charts and caregivers with the highest late and unbillable notes. The last page is the Caregiver Details page. This page provides supervisors with a date and caregiver slicer for filtering. There's 3 gauges - one for each note status, and a bar chart, which shows the same data over a chosen length of time.
+
 ## Files
 
 `README.md`- This file

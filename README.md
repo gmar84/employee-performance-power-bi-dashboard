@@ -22,21 +22,23 @@ Caregiver Select Slicer: Allows supervisors to select a specific caregiver for p
 
 Cards - KPIs which include Total, Late, Unbillable notes and a performance card which shows on time Notes vs Total Notes.
 
-Data Table - Shows employee, Total Notes, On Time notes, Late Notes, Unbillable Notes and a percentage of Late Notes which is calculated as Late Notes / Total Notes.
+Gauges - Shows counts for Total, Late and Unbillable notes as a measure for performance
 
-Treemaps - Top 5 counts of Caregivers with Unbillables and another with Late Notes
+Treemaps - Displays the top several Caregivers with the highest count of Late notes and Unbillable notes
 
-Area Charts - Shows Total Late Notes and Unbillables in the past 3 months with a trend line. The slicers at the top do not interact with these visuals, as they are meant to always provide an overall trend of performance.
+Area Charts - Shows Total Late Notes and Unbillables in the past 3 months with a trend line 
+
+Bar Chart - Grouped by Year, Month and Note Status, this gives the viewer an overview of any particular staff for the chosen time frame
 
 ### DAX Formulas Used
 
-Column added to the data set which determines if the note is Late or On Time:
+Column added to the data set which determines if the note is On Time, Late, or Unbillable by the use of a SWITCH statement:
 
-`NoteStatus = IF('notes'[days_to_sign] > 2, "Late", "On Time")`
+`NoteStatus = SWITCH(TRUE, notes[days_to_sign] < 3 && NOT(ISBLANK(notes[staff_sign_date])), "On Time", notes[days_to_sign] > 2 && notes[days_to_sign] < 8, "Late", notes[days_to_sign] > 7 || ISBLANK(notes[staff_sign_date]), "Unbillable")`
 
- A Measure which Counts a note as as unbillable if its over 6 days old OR there is no signature:
+ A Measure which Counts Unbillable notes with an IF statement for detecting blanks as zero counts
 
-`CountUnbillables = CALCULATE(COUNTROWS('notes'), 'notes'[days_to_sign] > 6 || 'notes'[staff_sign_date] = BLANK())`
+`CountUnbillablesGauge = IF(ISBLANK(CALCULATE(COUNTROWS('notes'), 'notes'[NoteStatus] = "Unbillable")), 0, CALCULATE(COUNTROWS('notes'), 'notes'[NoteStatus] = "Unbillable"))`
 
 Returns the month from the date:
 
@@ -46,10 +48,10 @@ Returns the month number from the date:
 
 `MonthNumber = FORMAT('notes'[date_of_service],"mm")`
 
-Used to concatenate the first 3 letters of first name + first two letters of last name:
+Used to encode names for privacy purposes:
 
 `supervisor_code = CONCATENATE(UPPER(LEFT(notes[client_supervisor], 3) ), UPPER(MID(notes[client_supervisor], FIND(" ", notes[client_supervisor], 2) + 1, 2 ) ) )`
 
-Used to create a column which further divide Dates into Billing Cycles, so that data can be viewed for each cycle, if desired.
+Used to create a new column which adds another hierarchy for Dates called Billing Cycles, so that data can be viewed for each cycle, if desired.
 
 `BillingCycle = IF(notes[date_of_service].[Day] > 0 && notes[date_of_service].[Day] < 16, "1-15", "16-eom")`

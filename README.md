@@ -40,6 +40,10 @@ Column added to the data set which determines if the note is On Time, Late, or U
 
 `NoteStatus = SWITCH(TRUE, notes[days_to_sign] < 3 && NOT(ISBLANK(notes[staff_sign_date])), "On Time", notes[days_to_sign] > 2 && notes[days_to_sign] < 8, "Late", notes[days_to_sign] > 7 || ISBLANK(notes[staff_sign_date]), "Unbillable")`
 
+ A Measure which Counts Late notes with an IF statement for detecting blanks as zero counts
+
+`CountLateNotesGauge = IF(ISBLANK(CALCULATE(COUNTROWS('notes'), 'notes'[NoteStatus] = "Late")), 0, CALCULATE(COUNTROWS('notes'), 'notes'[NoteStatus] = "Late"))`
+
  A Measure which Counts Unbillable notes with an IF statement for detecting blanks as zero counts
 
 `CountUnbillablesGauge = IF(ISBLANK(CALCULATE(COUNTROWS('notes'), 'notes'[NoteStatus] = "Unbillable")), 0, CALCULATE(COUNTROWS('notes'), 'notes'[NoteStatus] = "Unbillable"))`
